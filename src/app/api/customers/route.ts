@@ -37,6 +37,21 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     if (body.birthDate) body.birthDate = new Date(body.birthDate);
     const customer = await prisma.customer.create({ data: body });
+
+    // Auditoria
+    const adminUser = await prisma.user.findFirst({ where: { role: 'admin' } });
+    if (adminUser) {
+      await prisma.auditLog.create({
+        data: {
+          userId: adminUser.id,
+          action: 'create',
+          entity: 'customer',
+          entityId: customer.id,
+          details: `Novo cliente cadastrado: ${customer.name}`,
+        }
+      });
+    }
+
     return NextResponse.json(customer);
   } catch (error: any) {
     if (error.code === 'P2002') {

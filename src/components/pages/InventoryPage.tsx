@@ -44,6 +44,21 @@ export default function InventoryPage() {
     fetchProducts();
   }, [search, filter]);
 
+  const handleDelete = async (id: string) => {
+    if (!confirm('Tem certeza que deseja excluir este item do estoque?')) return;
+    try {
+      const res = await fetch(`/api/inventory/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        fetchItems();
+      } else {
+        const error = await res.json();
+        alert(error.error || 'Erro ao excluir item');
+      }
+    } catch (err) {
+      alert('Erro ao conectar ao servidor');
+    }
+  };
+
   const handleSave = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -216,7 +231,10 @@ export default function InventoryPage() {
                         >
                           <Edit className="w-4 h-4" />
                         </button>
-                        <button className="p-2 text-[var(--color-text-muted)] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all">
+                        <button 
+                          onClick={() => handleDelete(item.id)}
+                          className="p-2 text-[var(--color-text-muted)] hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all"
+                        >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>

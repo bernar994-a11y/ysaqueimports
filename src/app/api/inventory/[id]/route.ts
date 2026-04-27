@@ -48,6 +48,20 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
       });
     }
 
+    // Auditoria
+    const adminUser = await prisma.user.findFirst({ where: { role: 'admin' } });
+    if (adminUser) {
+      await prisma.auditLog.create({
+        data: {
+          userId: adminUser.id,
+          action: 'update',
+          entity: 'inventory',
+          entityId: id,
+          details: `Edição de item: ${item.product.name} (IMEI: ${item.imei || 'S/N'}). Status: ${item.status}`,
+        }
+      });
+    }
+
     return NextResponse.json(item);
   } catch (error) {
     console.error('Update inventory error:', error);
@@ -58,8 +72,25 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params;
+    const item = await prisma.inventoryItem.findUnique({ where: { id }, include: { product: true } });
+    
     await prisma.stockMovement.deleteMany({ where: { inventoryItemId: id } });
     await prisma.inventoryItem.delete({ where: { id } });
+
+    // Auditoria
+    const adminUser = await prisma.user.findFirst({ where: { role: 'admin' } });
+    if (adminUser && item) {
+      await prisma.auditLog.create({
+        data: {
+          userId: adminUser.id,
+          action: 'delete',
+          entity: 'inventory',
+          entityId: id,
+          details: `Exclusão de item do estoque: ${item.product.name} (IMEI: ${item.imei || 'S/N'})`,
+        }
+      });
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Delete inventory error:', error);

@@ -68,6 +68,20 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // Auditoria
+    const adminUser = await prisma.user.findFirst({ where: { role: 'admin' } });
+    if (adminUser) {
+      await prisma.auditLog.create({
+        data: {
+          userId: adminUser.id,
+          action: 'create',
+          entity: 'inventory',
+          entityId: item.id,
+          details: `Novo item em estoque: ${item.product.name} (IMEI: ${item.imei || 'S/N'})`,
+        }
+      });
+    }
+
     return NextResponse.json(item);
   } catch (error) {
     console.error('Create inventory error:', error);
