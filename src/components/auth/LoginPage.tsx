@@ -43,12 +43,11 @@ export default function LoginPage({ onLogin }: { onLogin: (user: any) => void })
 
       <div className="w-full max-w-md p-8 relative z-10">
         <div className="text-center mb-8">
-          <div className="inline-block mb-6 relative group">
-            <div className="absolute inset-0 bg-indigo-500/20 blur-2xl rounded-full group-hover:bg-indigo-500/40 transition-all duration-700" />
+          <div className="inline-block mb-6 relative">
             <img 
               src="/logo.png" 
               alt="Ysaque Imports Logo" 
-              className="relative w-48 h-auto mx-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-transform duration-500 hover:scale-105" 
+              className="w-56 h-auto mx-auto transition-transform duration-500 hover:scale-105" 
             />
           </div>
           <h1 className="text-3xl font-black text-white tracking-tighter mb-2">Painel de Controle</h1>

@@ -102,7 +102,7 @@ export default function Home() {
       `}>
         {/* Logo */}
         <div className="flex items-center gap-3 px-5 py-5 border-b border-[var(--color-border-primary)]">
-          <img src="/logo.png" alt="Logo" className="w-10 h-auto drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]" />
+          <img src="/logo.png" alt="Logo" className="w-10 h-auto" />
           <div>
             <h1 className="text-sm font-bold text-white tracking-tight leading-tight">Ysaque Imports</h1>
             <p className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider font-bold">ERP Manager</p>
