@@ -42,12 +42,17 @@ export default function LoginPage({ onLogin }: { onLogin: (user: any) => void })
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/20 blur-[120px] rounded-full animate-pulse" style={{ animationDelay: '2s' }} />
 
       <div className="w-full max-w-md p-8 relative z-10">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 mb-6 group transition-all duration-500 hover:scale-110">
-            <Smartphone className="w-8 h-8 text-indigo-400 group-hover:text-white transition-colors" />
+        <div className="text-center mb-8">
+          <div className="inline-block mb-6 relative group">
+            <div className="absolute inset-0 bg-indigo-500/20 blur-2xl rounded-full group-hover:bg-indigo-500/40 transition-all duration-700" />
+            <img 
+              src="/logo.png" 
+              alt="Ysaque Imports Logo" 
+              className="relative w-48 h-auto mx-auto drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-transform duration-500 hover:scale-105" 
+            />
           </div>
-          <h1 className="text-3xl font-black text-white tracking-tighter mb-2">Ysaque Imports</h1>
-          <p className="text-[var(--color-text-secondary)] text-sm font-medium">Bem-vindo ao centro de operações da sua loja.</p>
+          <h1 className="text-3xl font-black text-white tracking-tighter mb-2">Painel de Controle</h1>
+          <p className="text-[var(--color-text-secondary)] text-sm font-medium">Gestão de Vendas, Estoque e Financeiro.</p>
         </div>
 
         <div className="glass-card p-8 border-white/5 shadow-2xl backdrop-blur-3xl">

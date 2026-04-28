@@ -102,12 +102,10 @@ export default function Home() {
       `}>
         {/* Logo */}
         <div className="flex items-center gap-3 px-5 py-5 border-b border-[var(--color-border-primary)]">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-            <Smartphone className="w-5 h-5 text-white" />
-          </div>
+          <img src="/logo.png" alt="Logo" className="w-10 h-auto drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]" />
           <div>
-            <h1 className="text-base font-bold text-white tracking-tight">Ysaque Imports</h1>
-            <p className="text-[11px] text-[var(--color-text-muted)]">Sistema de Gestão</p>
+            <h1 className="text-sm font-bold text-white tracking-tight leading-tight">Ysaque Imports</h1>
+            <p className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider font-bold">ERP Manager</p>
           </div>
           <button
             className="ml-auto lg:hidden text-[var(--color-text-muted)] hover:text-white"
